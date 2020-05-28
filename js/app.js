@@ -1,7 +1,7 @@
 
 var nRisorse = 3;                            //Il numero di risorse, da cambiare
 var nProcessi = 3;                          //Il numero di processi, da cambiare
-var risorseTotali = [8, 7, 5];                      //Array con il totale di ogni risorsa disponibile
+var risorseTotali = [8, 7, 5];                     //Array con il totale di ogni risorsa disponibile
 var richiesteMinime = [[2, 2, 1],
                    [1, 2, 1],
                    [2, 1, 1]];                    //Matrice (rige processi, colonne risorse) contenente le richieste minime di ogni processo
@@ -28,14 +28,12 @@ function trovaMinimi(listaTentativi){
 
 }
 
-function pressButton(){
-    creaTabellaInserimento(document.getElementById("test"),'minreq',3,3);
-    creaTabellaInserimento(document.getElementById("test"),'needreq',3,3);
-    var tentativi = tentativiConSuccesso(nRisorse, nProcessi, risorseTotali, richiesteMinime, risorseNecessarie);
-    for(prova of trovaMinimi(tentativi)){
-        creaTabellaTentativo(prova);
-    }
+function refreshInput(){
+    creaTabellaInserimento(document.getElementById("input-table"),'minreq',nProcessi,nRisorse);
+    creaTabellaInserimento(document.getElementById("input-table"),'needreq',nProcessi,nRisorse);
 }
+
+
 
 //Contenitore, id tabella, nrighe, ncolonne
 function creaTabellaInserimento(container,id,rows,cols){
