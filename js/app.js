@@ -167,11 +167,6 @@ function creaTabellaTentativo(tentativo){
         var x=tentativo[ii];
 
 
-        //Paragrafo n tentativo
-        var parSeparazione=document.createElement('p');
-        parSeparazione.innerHTML='allocazione n.'+(tentativo.length-1-ii);
-        tableContainer.appendChild(parSeparazione);
-
         //Tabella
         var tabella = document.createElement("table");
         
@@ -181,6 +176,7 @@ function creaTabellaTentativo(tentativo){
         var Intestazionealtariga=document.createElement('tr');
 
         var vuoto=document.createElement('th');//spazietto vuoto tabella
+        vuoto.innerHTML='alloc n.'+(tentativo.length-1-ii);
         Intestazionealtariga.appendChild(vuoto);
 
         for(var i=1;i<x.length+1;i++){
