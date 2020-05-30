@@ -169,7 +169,7 @@ function creaTabellaTentativo(tentativo){
 
         //Paragrafo n tentativo
         var parSeparazione=document.createElement('p');
-        parSeparazione.innerHTML='allocazione n.'+(tentativo.length-ii);
+        parSeparazione.innerHTML='allocazione n.'+(tentativo.length-1-ii);
         tableContainer.appendChild(parSeparazione);
 
         //Tabella
