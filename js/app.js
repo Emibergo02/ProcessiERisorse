@@ -8,6 +8,8 @@ var richiesteMinime = [[2, 2, 1],
 var risorseNecessarie = [[4, 4, 2],
                      [2, 4, 2],
                      [4, 2, 2]];                  //Matrice (rige processi, colonne risorse) contenente il numero di risorse necessarie a un processo per terminare
+var tentativiMinimi=[];
+var resultCounter=0;
 
 //ritorna int
 function trovaMinimi(listaTentativi){
@@ -28,9 +30,78 @@ function trovaMinimi(listaTentativi){
 
 }
 
+function refreshResult(modifier){
+
+    const elementDiv = document.getElementById("body");
+    elementDiv.textContent='';
+
+    if(resultCounter >= tentativiMinimi.length)resultCounter=0;
+    else if(resultCounter < 0)resultCounter=tentativiMinimi.length-1;
+
+    creaTabellaTentativo(tentativiMinimi[resultCounter]);
+    resultCounter+=modifier;
+
+    var pulsanteSinistra=document.createElement("button");
+    pulsanteSinistra.setAttribute("onclick","refreshResult(-1)");
+    pulsanteSinistra.innerText='<-';
+    var pulsanteDestra=document.createElement("button");
+    pulsanteDestra.setAttribute("onclick","refreshResult(1)");
+    pulsanteDestra.innerText='->';
+
+    elementDiv.appendChild(pulsanteSinistra);
+    elementDiv.appendChild(pulsanteDestra);
+}
+
+
 function refreshInput(){
-    creaTabellaInserimento(document.getElementById("input-table"),'minreq',nProcessi,nRisorse);
-    creaTabellaInserimento(document.getElementById("input-table"),'needreq',nProcessi,nRisorse);
+    const elementContainer =document.getElementById("input-table");
+    elementContainer.textContent='';
+
+    //Risorse disponibili
+    var par1=document.createElement("p");
+    par1.innerText="Risorse diponibili";
+    elementContainer.appendChild(par1);
+    var tabella = document.createElement("table");
+    var testa = document.createElement("thead");
+    var corpo = document.createElement("tbody");
+
+    var riga = document.createElement('tr');
+    for(var i=0;i<nRisorse;i++){
+        var colonna=document.createElement("td");
+        colonna.innerHTML="r"+(i+1);
+        
+        riga.appendChild(colonna);
+    }
+    testa.appendChild(riga);
+    
+    var riga=document.createElement("tr");
+    for(var i=0;i<nRisorse;i++){
+        var colonna=document.createElement("td");
+
+        var input=document.createElement('input');
+        input.setAttribute("type",'text');
+        input.setAttribute("id","maxres"+"-"+i);
+        colonna.appendChild(input);
+            
+        riga.appendChild(colonna);
+    }
+    corpo.appendChild(riga);
+    //Fine
+    tabella.appendChild(testa);
+    tabella.appendChild(corpo);
+    elementContainer.appendChild(tabella);
+
+    //Par per nome tabelle
+    var par1=document.createElement("p");
+    par1.innerText="Risorse minime";
+    var par2=document.createElement("p");
+    par2.innerText="Risorse necessarie";
+
+    //Scrivo tabelle
+    elementContainer.appendChild(par1);
+    creaTabellaInserimento(elementContainer,'minreq',nProcessi,nRisorse);
+    elementContainer.appendChild(par2);
+    creaTabellaInserimento(elementContainer,'needreq',nProcessi,nRisorse);
 }
 
 
