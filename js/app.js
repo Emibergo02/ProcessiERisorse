@@ -163,13 +163,13 @@ function creaTabellaTentativo(tentativo){
     //TODO: mettere la linea sopra su .css
 
 
-    for(x of tentativo){//x Ã¨ la matrice risorse/processi
-
+    for(var ii = tentativo.length - 1; ii >= 0; ii--){//x Ã¨ la matrice risorse/processi
+        var x=tentativo[ii];
 
 
         //Paragrafo n tentativo
         var parSeparazione=document.createElement('p');
-        parSeparazione.innerHTML='allocazione n.'+counter;
+        parSeparazione.innerHTML='allocazione n.'+(tentativo.length-ii);
         tableContainer.appendChild(parSeparazione);
 
         //Tabella
